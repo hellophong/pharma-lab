@@ -32,7 +32,7 @@ Cards with a `url` that aren't `coming-soon` become clickable and open in a new 
 
 ## Restyle
 
-All colors, type, spacing, radius and motion live as CSS custom properties at the top of `src/styles.css`. Dark mode redefines the same color tokens under `:root[data-theme="dark"]`. The site opens in light mode; the toggle saves a visitor's choice in `localStorage`.
+All colors, type, spacing, radius and motion live as CSS custom properties at the top of `src/styles.css`. Dark mode redefines the same color tokens under `:root[data-theme="dark"]`. The site always opens in light mode; the toggle switches themes for the current visit.
 
 ## Deployment
 
