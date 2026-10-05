@@ -1,6 +1,8 @@
 import { ToolCard } from "./components/ToolCard";
 import { tools } from "./data/tools";
 
+const lastUpdated = "10/05/2026";
+
 export default function App() {
   return (
     <div className="page">
@@ -21,7 +23,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <p>Phong · {new Date().getFullYear()}</p>
+        <p>Updated {lastUpdated}</p>
       </footer>
     </div>
   );

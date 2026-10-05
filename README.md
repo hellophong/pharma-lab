@@ -36,8 +36,14 @@ All colors, type, spacing, radius and motion live as CSS custom properties at th
 
 ## Deployment
 
-Local dev and preview serve from `/`. Production builds for GitHub Pages set `VITE_BASE_PATH=/pharma-lab/`:
+Every push to `main` runs `.github/workflows/deploy-pages.yml`: install, lint, build with `VITE_BASE_PATH=/pharma-lab/`, then publish `dist/` to GitHub Pages. You can also run it by hand from the Actions tab ("Run workflow").
+
+One-time setup: in the repo's Settings → Pages, set **Source** to **GitHub Actions**.
+
+Local dev and preview serve from `/`. To check a production build locally:
 
 ```sh
 VITE_BASE_PATH=/pharma-lab/ pnpm build
 ```
+
+The footer's "Updated" date is the `lastUpdated` constant in `src/App.tsx`.
