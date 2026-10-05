@@ -9,6 +9,26 @@
       content="Pharma Lab: a launchpad for AI-built tools for pharma agency teams. Built by Phong."
     />
     <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <script>
+      // Apply the saved or system theme before first paint to avoid a flash.
+      (function () {
+        var theme;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+        if (theme === "dark") {
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute("content", "#0f1f1b");
+        }
+      })();
+    </script>
     <title>Pharma Lab — Built by Phong</title>
   </head>
   <body>

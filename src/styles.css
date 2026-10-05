@@ -10,6 +10,7 @@
   --color-line: #d7dbcf;
   --color-placeholder-line: #b4b9ad;
   --color-tag-muted-bg: #eeede7;
+  --color-on-accent: #183d36;
   --color-focus: #8b4a26;
 
   /* Type */
@@ -43,8 +44,26 @@
 
   /* Motion */
   --duration: 180ms;
+  --duration-theme: 300ms;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --lift: -3px;
+
+  color-scheme: light;
+}
+
+/* Dark theme: same tokens, new values. Set on <html data-theme="dark">. */
+:root[data-theme="dark"] {
+  --color-paper: #0f1f1b;
+  --color-card: #142823;
+  --color-ink: #e9e7dc;
+  --color-muted: #a2ab9d;
+  --color-primary: #e4ebc0;
+  --color-line: #2a3f39;
+  --color-placeholder-line: #4d5f58;
+  --color-tag-muted-bg: #1c322c;
+  --color-focus: #f0a46c;
+
+  color-scheme: dark;
 }
 
 *,
@@ -61,6 +80,9 @@ body {
   font-size: var(--text-base);
   line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
+  transition:
+    background-color var(--duration-theme) var(--ease),
+    color var(--duration-theme) var(--ease);
 }
 
 h1,
@@ -71,7 +93,7 @@ p {
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-primary);
+  color: var(--color-on-accent);
 }
 
 :focus-visible {
@@ -81,9 +103,57 @@ p {
 
 /* Page */
 .page {
+  position: relative;
   max-width: var(--container);
   margin: 0 auto;
   padding: var(--space-24) var(--space-6) var(--space-12);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-tag);
+  background: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: border-color var(--duration) var(--ease);
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-primary);
+}
+
+.theme-toggle svg {
+  grid-area: 1 / 1;
+  width: 20px;
+  height: 20px;
+  transition:
+    transform var(--duration-theme) var(--ease),
+    opacity var(--duration-theme) var(--ease);
+}
+
+/* Show the icon for the theme you'd switch to; the other spins away. */
+.theme-toggle__sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+:root[data-theme="dark"] .theme-toggle__sun {
+  opacity: 1;
+  transform: none;
+}
+
+:root[data-theme="dark"] .theme-toggle__moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
 }
 
 /* Header */
@@ -154,6 +224,11 @@ p {
   background: var(--color-card);
   border: var(--border-width) solid var(--color-primary);
   border-radius: var(--radius-card);
+  transition:
+    background-color var(--duration-theme) var(--ease),
+    border-color var(--duration-theme) var(--ease),
+    transform var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease);
 }
 
 .card__title {
@@ -197,12 +272,6 @@ p {
   outline-offset: 4px;
 }
 
-.card--open {
-  transition:
-    transform var(--duration) var(--ease),
-    box-shadow var(--duration) var(--ease);
-}
-
 .card--open:hover {
   transform: translateY(var(--lift));
   box-shadow: 0 var(--space-2) 0 -2px var(--color-accent);
@@ -232,7 +301,7 @@ p {
 
 .tag--live {
   background: var(--color-accent);
-  color: var(--color-primary);
+  color: var(--color-on-accent);
 }
 
 .tag--prototype {
@@ -259,10 +328,17 @@ p {
     padding-top: var(--space-16);
     padding-inline: var(--space-4);
   }
+
+  .theme-toggle {
+    top: var(--space-4);
+    right: var(--space-4);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card--open {
+  body,
+  .card,
+  .theme-toggle svg {
     transition: none;
   }
 

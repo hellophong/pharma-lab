@@ -1,3 +1,4 @@
+import { ThemeToggle } from "./components/ThemeToggle";
 import { ToolCard } from "./components/ToolCard";
 import { tools } from "./data/tools";
 
@@ -6,6 +7,7 @@ const lastUpdated = "10/05/2026";
 export default function App() {
   return (
     <div className="page">
+      <ThemeToggle />
       <header className="masthead">
         <h1 className="masthead__title">Pharma Lab</h1>
         <p className="masthead__byline">Built by Phong</p>
