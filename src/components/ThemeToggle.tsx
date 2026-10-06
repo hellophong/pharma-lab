@@ -4,12 +4,9 @@ type Theme = "light" | "dark";
 
 const themeColor: Record<Theme, string> = { light: "#183d36", dark: "#0f1f1b" };
 
-// index.html sets data-theme before first paint, so read it from there.
-const readTheme = (): Theme =>
-  document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-
+// Every visit opens in light mode; the toggle lasts for the current visit.
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(readTheme);
+  const [theme, setTheme] = useState<Theme>("light");
   const next: Theme = theme === "dark" ? "light" : "dark";
 
   const toggle = () => {
@@ -17,11 +14,6 @@ export function ThemeToggle() {
     document
       .querySelector('meta[name="theme-color"]')
       ?.setAttribute("content", themeColor[next]);
-    try {
-      localStorage.setItem("theme", next);
-    } catch {
-      // Storage can be blocked; the toggle still works for this visit.
-    }
     setTheme(next);
   };
 

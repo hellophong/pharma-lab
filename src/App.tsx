@@ -10,7 +10,7 @@ export default function App() {
       <ThemeToggle />
       <header className="masthead">
         <h1 className="masthead__title">Pharma Lab</h1>
-        <p className="masthead__byline">Built by Phong</p>
+        <p className="masthead__byline">Built by Phong Nguyen</p>
         <p className="masthead__intro">AI-built tools for agency teams.</p>
       </header>
 
